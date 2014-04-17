@@ -19,8 +19,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="apple-mobile-web-app-capable" content="yes">
 
-  <link rel="stylesheet" href="/assets/css/jekyll-barebone.css">
-  <link rel="stylesheet" href="/assets/css/font-awesome.min.css">
+  <link rel="stylesheet" href="{{ site.baseurl }}assets/css/jekyll-barebone.css">
+  <link rel="stylesheet" href="{{ site.baseurl }}assets/css/font-awesome.min.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -33,17 +33,14 @@
 <body>
 
 
-
-
-
-
+  {{ content }}
 
   <!-- jQuery stuff goes here -->
-  <script src="/assets/js/lib/jquery/jquery.min.js"></script>
-  <script src="/assets/js/lib/bootstrap/bootstrap.min.js"></script>
+  <script src="{{ site.baseurl }}assets/js/lib/jquery/jquery.min.js"></script>
+  <script src="{{ site.baseurl }}assets/js/lib/bootstrap/bootstrap.min.js"></script>
 
   <!-- Your application Javasscript goes here  -->
-  <script src="/assets/js/app/app.js"></script>
+  <script src="{{ site.baseurl }}assets/js/app/app.js"></script>
 
 </body>
 </html>

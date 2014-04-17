@@ -222,7 +222,10 @@ module.exports = function(grunt) {
   // Optimise and Build images for production
   grunt.registerTask('buildimg', ['imagemin']);
 
-  // Default Task
+  // Default Task Less
   grunt.registerTask('default', ['less', 'imagemin', 'jshint']);
+
+  // Default Task Compas
+  // grunt.registerTask('default', ['compass', 'imagemin', 'jshint']);
 
 };

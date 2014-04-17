@@ -1,3 +1,6 @@
-'use strict';
 
-var App = angular.module('AppName', []);
+(function ($) { 'use strict';
+
+  // Begin Awesome Here
+
+})(window.jQuery);
