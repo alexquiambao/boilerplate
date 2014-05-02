@@ -1,9 +1,9 @@
 {
   "name":         "jekyll-barebone",
-  "version":      "0.1.0",
+  "version":      "0.1.2",
   "description":  "Project scaffold/boilerplate/template for front-end prototyping with Jekyll",
   "author":       "Pongstr Ordillo",
-  "email":        "philip.ordillo@torocommerce.com",
+  "email":        "twiz.tickler@gmail.com",
   "private":      "true",
   "license":      "MIT",
   "dependencies": {
