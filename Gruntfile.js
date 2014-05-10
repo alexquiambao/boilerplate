@@ -9,6 +9,12 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+    site: {
+      app:  'application',
+      bower: 'bower_components',
+      dist_dir: 'dist',
+      src: 'source'
+    },
     banner: '/*! ========================================================================\n' +
             ' * <%= pkg.name %> v<%= pkg.version %> \n' +
             ' * =========================================================================\n' +
@@ -23,15 +29,15 @@ module.exports = function(grunt) {
           { // Bootstrap Glyphicons
             expand: true,
             flatten: true,
-            src: ['bower_components/bootstrap/dist/fonts/*'],
-            dest: 'application/assets/fonts/bootstrap/',
+            src: ['<%= site.bower %>/bootstrap/dist/fonts/*'],
+            dest: '<%= site.app %>/assets/fonts/bootstrap/',
             filter: 'isFile'
           },
           { // Font-Awesome Glyphs
             expand: true,
             flatten: true,
-            src: ['bower_components/font-awesome/fonts/*'],
-            dest: 'application/assets/fonts/font-awesome/',
+            src: ['<%= site.bower %>/font-awesome/fonts/*'],
+            dest: '<%= site.app %>/assets/fonts/font-awesome/',
             filter: 'isFile'
           }
         ]
@@ -43,44 +49,56 @@ module.exports = function(grunt) {
             expand: true,
             flatten: true,
             src: [
-              'bower_components/angular/angular.js',
-              'bower_components/angular/angular.min.js',
-              'bower_components/angular-animate/angular-animate.js',
-              'bower_components/angular-animate/angular-animate.min.js',
-              'bower_components/angular-cookies/angular-cookies.js',
-              'bower_components/angular-cookies/angular-cookies.min.js',
-              'bower_components/angular-loader/angular-loader.js',
-              'bower_components/angular-loader/angular-loader.min.js',
-              'bower_components/angular-resource/angular-resource.js',
-              'bower_components/angular-resource/angular-resource.min.js',
-              'bower_components/angular-route/angular-route.js',
-              'bower_components/angular-route/angular-route.min.js',
-              'bower_components/angular-sanitize/angular-sanitize.js',
-              'bower_components/angular-sanitize/angular-sanitize.min.js',
-              'bower_components/angular-scenario/angular-scenario.js',
-              'bower_components/angular-scenario/angular-scenario.min.js',
-              'bower_components/angular-touch/angular-touch.js',
-              'bower_components/angular-touch/angular-touch.min.js'
+              // Angular Library and Modules
+              '<%= site.bower %>/angular/angular.js',
+              '<%= site.bower %>/angular/angular.min.js',
+              '<%= site.bower %>/angular-animate/angular-animate.js',
+              '<%= site.bower %>/angular-animate/angular-animate.min.js',
+              '<%= site.bower %>/angular-cookies/angular-cookies.js',
+              '<%= site.bower %>/angular-cookies/angular-cookies.min.js',
+              '<%= site.bower %>/angular-loader/angular-loader.js',
+              '<%= site.bower %>/angular-loader/angular-loader.min.js',
+              '<%= site.bower %>/angular-resource/angular-resource.js',
+              '<%= site.bower %>/angular-resource/angular-resource.min.js',
+              '<%= site.bower %>/angular-route/angular-route.js',
+              '<%= site.bower %>/angular-route/angular-route.min.js',
+              '<%= site.bower %>/angular-sanitize/angular-sanitize.js',
+              '<%= site.bower %>/angular-sanitize/angular-sanitize.min.js',
+              '<%= site.bower %>/angular-scenario/angular-scenario.js',
+              '<%= site.bower %>/angular-scenario/angular-scenario.min.js',
+              '<%= site.bower %>/angular-touch/angular-touch.js',
+              '<%= site.bower %>/angular-touch/angular-touch.min.js'
+
+              // UI Bootstrap
+              '<%= site.bower %>/angular-bootstrap/ui-bootstrap.js',
+              '<%= site.bower %>/angular-bootstrap/ui-bootstrap.min.js',
+              '<%= site.bower %>/angular-bootstrap/ui-bootstrap-tpls.js',
+              '<%= site.bower %>/angular-bootstrap/ui-bootstrap-tpls.min.js',
+
+              // UI-Router
+              '<%= site.bower %>/angular-ui-router/release/angular-ui-router.js',
+              '<%= site.bower %>/angular-ui-router/release/angular-ui-router.min.js',
+
             ],
-            dest: 'application/core/lib/angular/',
+            dest: '<%= site.app %>/core/lib/angular/',
             filter: 'isFile'
           },
           { // Copy jQuery library
             expand: true,
             flatten: true,
             src: [
-              'bower_components/jquery/jquery.js',
-              'bower_components/jquery/jquery.min.js',
-              'bower_components/jquery/jquery.min.map'
+              '<%= site.bower %>/jquery/jquery.js',
+              '<%= site.bower %>/jquery/jquery.min.js',
+              '<%= site.bower %>/jquery/jquery.min.map'
             ],
-            dest: 'application/core/lib/jquery/',
+            dest: '<%= site.app %>/core/lib/jquery/',
             filter: 'isFile'
           },
           { // Copy Bootstrap
             expand: true,
             flatten: true,
-            src: ['bower_components/bootstrap/dist/js/*'],
-            dest: 'application/core/lib/bootstrap/',
+            src: ['<%= site.bower %>/bootstrap/dist/js/*'],
+            dest: '<%= site.app %>/core/lib/bootstrap/',
             filter: 'isFile'
           }
         ]
@@ -91,15 +109,15 @@ module.exports = function(grunt) {
           { // Copy Bootstrap Less files
             expand: true,
             flatten: true,
-            src: ['bower_components/bootstrap/less/*'],
-            dest: 'source/less/bootstrap/',
+            src: ['<%= site.bower %>/bootstrap/less/*'],
+            dest: '<%= site.src %>/less/bootstrap/',
             filter: 'isFile'
           },
           { // Font-awesome less stylesheets
             expand: true,
             flatten: true,
-            src: ['bower_components/font-awesome/less/*'],
-            dest: 'source/less/font-awesome',
+            src: ['<%= site.bower %>/font-awesome/less/*'],
+            dest: '<%= site.src %>/less/font-awesome',
             filter: 'isFile'
           }
         ]
@@ -114,8 +132,8 @@ module.exports = function(grunt) {
           sourceMap: false
         },
         files: {
-          'application/assets/css/<%= pkg.name %>.css' : 'source/less/bootstrap.less',
-          'application/assets/css/font-awesome.css': 'source/less/font-awesome/font-awesome.less'
+          '<%= site.app %>/assets/css/<%= pkg.name %>.css' : '<%= site.src %>/less/bootstrap.less',
+          '<%= site.app %>/assets/css/font-awesome.css': '<%= site.src %>/less/font-awesome/font-awesome.less'
         }
       },
       production: {
@@ -125,8 +143,8 @@ module.exports = function(grunt) {
           compress: true
         },
         files: {
-          'application/assets/css/<%= pkg.name %>.min.css' : 'source/less/bootstrap.less',
-          'application/assets/css/font-awesome.min.css': 'source/less/font-awesome/font-awesome.less'
+          '<%= site.app %>/assets/css/<%= pkg.name %>.min.css' : '<%= site.src %>/less/bootstrap.less',
+          '<%= site.app %>/assets/css/font-awesome.min.css': '<%= site.src %>/less/font-awesome/font-awesome.less'
         }
       }
     },
@@ -134,12 +152,12 @@ module.exports = function(grunt) {
     // Watch Tasks
     watch: {
       less: {
-        files: ['source/less/**/*.less'],
+        files: ['<%= site.src %>/less/**/*.less'],
         tasks: ['less:development']
       },
       jshint: {
         files: [
-          'application/assets/js/app/*.js',
+          '<%= site.app %>/assets/js/app/*.js',
           'server/server.js'
         ],
         tasks: ['jshint:express', 'jshint:app']
@@ -157,8 +175,8 @@ module.exports = function(grunt) {
           {
             expand: true,
             src: ['*.{png,jpg,gif}'],
-            cwd: 'source/img/',
-            dest: 'application/assets/img/'
+            cwd: '<%= site.src %>/img/',
+            dest: '<%= site.app %>/assets/img/'
           }
         ]
       }
@@ -174,9 +192,9 @@ module.exports = function(grunt) {
         },
         files: {
           src: [
-            'application/assets/css/<%= pkg.name %>.css',
-            'application/assets/css/<%= pkg.name %>.min.css',
-            'application/core/app/app.js'
+            '<%= site.app %>/assets/css/<%= pkg.name %>.css',
+            '<%= site.app %>/assets/css/<%= pkg.name %>.min.css',
+            '<%= site.app %>/core/app/app.js'
           ]
         }
       }
@@ -197,10 +215,10 @@ module.exports = function(grunt) {
       },
       app: {
         options: {
-          jshintrc: 'application/core/app/.jshintrc'
+          jshintrc: '<%= site.app %>/core/app/.jshintrc'
         },
         src: [
-          'application/core/app/app.js'
+          '<%= site.app %>/core/app/app.js'
         ]
       }
     },
@@ -248,6 +266,6 @@ module.exports = function(grunt) {
   grunt.registerTask('release-version', ['less', 'imagemin', 'bump', 'usebanner']);
 
   // Default Task
-  grunt.registerTask('default', ['less', 'imagemin']);
+  grunt.registerTask('default', ['jshint', 'less', 'imagemin']);
 
 };
