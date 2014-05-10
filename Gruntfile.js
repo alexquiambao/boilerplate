@@ -9,6 +9,12 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+    site: {
+      app:  'application',
+      bower: 'bower_components',
+      dist_dir: 'dist',
+      src: 'source'
+    },
     banner: '/*! ========================================================================\n' +
             ' * <%= pkg.name %> v<%= pkg.version %> \n' +
             ' * =========================================================================\n' +
@@ -24,15 +30,15 @@ module.exports = function(grunt) {
           { // Bootstrap Glyphicons
             expand: true,
             flatten: true,
-            src: ['bower_components/bootstrap/dist/fonts/*'],
-            dest: 'application/assets/fonts/bootstrap/',
+            src: ['<%= site.bower %>/bootstrap/dist/fonts/*'],
+            dest: '<%= site.app %>/assets/fonts/bootstrap/',
             filter: 'isFile'
           },
           { // Font-Awesome Glyphs
             expand: true,
             flatten: true,
-            src: ['bower_components/font-awesome/fonts/*'],
-            dest: 'application/assets/fonts/font-awesome/',
+            src: ['<%= site.bower %>/font-awesome/fonts/*'],
+            dest: '<%= site.app %>/assets/fonts/font-awesome/',
             filter: 'isFile'
           }
         ]
@@ -44,18 +50,18 @@ module.exports = function(grunt) {
             expand: true,
             flatten: true,
             src: [
-              'bower_components/jquery/jquery.js',
-              'bower_components/jquery/jquery.min.js',
-              'bower_components/jquery/jquery.min.map'
+              '<%= site.bower %>/jquery/dist/jquery.js',
+              '<%= site.bower %>/jquery/dist/jquery.min.js',
+              '<%= site.bower %>/jquery/dist/jquery.min.map'
             ],
-            dest: 'application/assets/js/lib/jquery/',
+            dest: '<%= site.app %>/assets/js/lib/jquery/',
             filter: 'isFile'
           },
           { // Copy Bootstrap
             expand: true,
             flatten: true,
-            src: ['bower_components/bootstrap/dist/js/*'],
-            dest: 'application/assets/js/lib/bootstrap/',
+            src: ['<%= site.bower %>/bootstrap/dist/js/*'],
+            dest: '<%= site.app %>/assets/js/lib/bootstrap/',
             filter: 'isFile'
           }
         ]
@@ -66,15 +72,15 @@ module.exports = function(grunt) {
           { // Copy Bootstrap Less files
             expand: true,
             flatten: true,
-            src: ['bower_components/bootstrap/less/*'],
-            dest: 'source/less/bootstrap/',
+            src: ['<%= site.bower %>/bootstrap/less/*'],
+            dest: '<%= site.src %>/less/bootstrap/',
             filter: 'isFile'
           },
           { // Font-awesome less stylesheets
             expand: true,
             flatten: true,
-            src: ['bower_components/font-awesome/less/*'],
-            dest: 'source/less/font-awesome',
+            src: ['<%= site.bower %>/font-awesome/less/*'],
+            dest: '<%= site.src %>/less/font-awesome',
             filter: 'isFile'
           }
         ]
@@ -90,8 +96,8 @@ module.exports = function(grunt) {
           sourceMap: false
         },
         files: {
-          'application/assets/css/<%= pkg.name %>.css' : 'source/less/bootstrap.less',
-          'application/assets/css/font-awesome.css': 'source/less/font-awesome/font-awesome.less'
+          '<%= site.app %>/assets/css/<%= pkg.name %>.css' : '<%= site.src %>/less/bootstrap.less',
+          '<%= site.app %>/assets/css/font-awesome.css': '<%= site.src %>/less/font-awesome/font-awesome.less'
         }
       },
       production: {
@@ -101,8 +107,8 @@ module.exports = function(grunt) {
           compress: true
         },
         files: {
-          'application/assets/css/<%= pkg.name %>.min.css' : 'source/less/bootstrap.less',
-          'application/assets/css/font-awesome.min.css': 'source/less/font-awesome/font-awesome.less'
+          '<%= site.app %>/assets/css/<%= pkg.name %>.min.css' : '<%= site.src %>/less/bootstrap.less',
+          '<%= site.app %>/assets/css/font-awesome.min.css': '<%= site.src %>/less/font-awesome/font-awesome.less'
         }
       }
     },
@@ -111,15 +117,15 @@ module.exports = function(grunt) {
     compass: {
       dist: {
         options: {
-          sassDir: 'source/scss',
-          cssDir: 'application/assets/css',
+          sassDir: '<%= site.src %>/scss',
+          cssDir: '<%= site.app %>/assets/css',
           environment: 'production'
         }
       },
       dev: {
         options: {
-          sassDir: 'source/scss',
-          cssDir: 'application/assets/css',
+          sassDir: '<%= site.src %>/scss',
+          cssDir: '<%= site.app %>/assets/css',
         }
       }
     },
@@ -128,12 +134,12 @@ module.exports = function(grunt) {
     // =====================================
     watch: {
       less: {
-        files: ['source/less/**/*.less'],
+        files: ['<%= site.src %>/less/**/*.less'],
         tasks: ['less:development']
       },
       jshint: {
         files: [
-          'application/assets/js/app/*.js'
+          '<%= site.app %>/assets/js/app/*.js'
         ],
         tasks: ['jshint:express', 'jshint:app']
       }
@@ -151,8 +157,8 @@ module.exports = function(grunt) {
           {
             expand: true,
             src: ['*.{png,jpg,gif}'],
-            cwd: 'source/img/',
-            dest: 'application/assets/img/'
+            cwd: '<%= site.src %>/img/',
+            dest: '<%= site.app %>/assets/img/'
           }
         ]
       }
@@ -183,10 +189,10 @@ module.exports = function(grunt) {
       },
       app: {
         options: {
-          jshintrc: 'application/assets/js/app/.jshintrc'
+          jshintrc: '<%= site.app %>/assets/js/app/.jshintrc'
         },
         src: [
-          'application/assets/js/app/app.js'
+          '<%= site.app %>/assets/js/app/app.js'
         ]
       }
     }

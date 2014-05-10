@@ -1,13 +1,13 @@
 {
   "name":         "jekyll-barebone",
-  "version":      "0.1.2",
+  "version":      "0.1.3",
   "description":  "Project scaffold/boilerplate/template for front-end prototyping with Jekyll",
   "author":       "Pongstr Ordillo",
   "email":        "twiz.tickler@gmail.com",
   "private":      "true",
   "license":      "MIT",
   "dependencies": {
-    "jquery":       "2.0.3",
+    "jquery":       "2.1.1",
     "bootstrap":    "3.1.1",
     "font-awesome": "4.0.3"
   }
