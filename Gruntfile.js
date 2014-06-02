@@ -67,7 +67,7 @@ module.exports = function(grunt) {
               '<%= site.bower %>/angular-scenario/angular-scenario.js',
               '<%= site.bower %>/angular-scenario/angular-scenario.min.js',
               '<%= site.bower %>/angular-touch/angular-touch.js',
-              '<%= site.bower %>/angular-touch/angular-touch.min.js'
+              '<%= site.bower %>/angular-touch/angular-touch.min.js',
 
               // UI Bootstrap
               '<%= site.bower %>/angular-bootstrap/ui-bootstrap.js',
