@@ -1,5 +1,5 @@
 /*! =========================================================================
- * Express Server for AngularJS web apps v0.1.0
+ * Express Server for AngularJS web apps v0.1.1
  * Copyright 2014 (c) Pongstr Ordillo. MIT License.
  * ========================================================================= */
 

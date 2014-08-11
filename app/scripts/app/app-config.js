@@ -1,5 +1,5 @@
 /*! ========================================================================
- * angular-barebone v0.1.6
+ * angular-barebone v0.1.7
  * =========================================================================
  * a simple project scaffold for prototyping angularjs projects
  * Authored by Pongstr Ordillo [twiz.tickler@gmail.com]
