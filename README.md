@@ -7,10 +7,10 @@ started on AngularJS. :)
 
 This boilerplate uses:
 
-- Angular 1.2.15,
-- jQuery 2.0.3
-- Bootstrap 3.1.1
-- Font-Awesome 4.0.3
+- Angular 1.2.21,
+- jQuery 2.1.1
+- Bootstrap 3.2.0
+- Font-Awesome 4.1.0
 
 I know [Angular UI Bootstrap](http://angular-ui.github.io/bootstrap/) but I
 haven't really got the time to study it and since these were the main frontend
@@ -41,10 +41,16 @@ Directory Structure
 
 ``` shell
 boilerplate: angularjs   # root directory
-├── application
-|   └── core
+├── app
+|   └── scripts
 |   |   ├── app
 |   |   └── lib
+│   ├── module
+|   |   └── module_name
+|   |       ├── views
+|   |       ├── module.js
+|   |       ├── module.config.js
+|   |       └── module.controller.js
 │   ├── assets
 │   │   ├── css
 │   │   ├── fonts

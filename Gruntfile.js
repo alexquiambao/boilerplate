@@ -10,11 +10,12 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     site: {
-      app:  'application',
-      bower: 'bower_components',
-      dist_dir: 'dist',
-      src: 'source'
+      app:      'app',
+      src:      'src',
+      bower:    'bower_components',
+      dist_dir: '_dist'
     },
+    pkg: grunt.file.readJSON('package.json'),
     banner: '/*! ========================================================================\n' +
             ' * <%= pkg.name %> v<%= pkg.version %> \n' +
             ' * =========================================================================\n' +
@@ -60,8 +61,6 @@ module.exports = function(grunt) {
               '<%= site.bower %>/angular-loader/angular-loader.min.js',
               '<%= site.bower %>/angular-resource/angular-resource.js',
               '<%= site.bower %>/angular-resource/angular-resource.min.js',
-              '<%= site.bower %>/angular-route/angular-route.js',
-              '<%= site.bower %>/angular-route/angular-route.min.js',
               '<%= site.bower %>/angular-sanitize/angular-sanitize.js',
               '<%= site.bower %>/angular-sanitize/angular-sanitize.min.js',
               '<%= site.bower %>/angular-scenario/angular-scenario.js',
@@ -80,25 +79,18 @@ module.exports = function(grunt) {
               '<%= site.bower %>/angular-ui-router/release/angular-ui-router.min.js',
 
             ],
-            dest: '<%= site.app %>/core/lib/angular/',
+            dest: '<%= site.app %>/scripts/lib/angular/',
             filter: 'isFile'
           },
           { // Copy jQuery library
             expand: true,
             flatten: true,
             src: [
-              '<%= site.bower %>/jquery/jquery.js',
-              '<%= site.bower %>/jquery/jquery.min.js',
-              '<%= site.bower %>/jquery/jquery.min.map'
+              '<%= site.bower %>/jquery/dist/jquery.js',
+              '<%= site.bower %>/jquery/dist/jquery.min.js',
+              '<%= site.bower %>/jquery/dist/jquery.min.map'
             ],
-            dest: '<%= site.app %>/core/lib/jquery/',
-            filter: 'isFile'
-          },
-          { // Copy Bootstrap
-            expand: true,
-            flatten: true,
-            src: ['<%= site.bower %>/bootstrap/dist/js/*'],
-            dest: '<%= site.app %>/core/lib/bootstrap/',
+            dest: '<%= site.app %>/scripts/lib/jquery/',
             filter: 'isFile'
           }
         ]
@@ -108,9 +100,9 @@ module.exports = function(grunt) {
         files: [
           { // Copy Bootstrap Less files
             expand: true,
-            flatten: true,
-            src: ['<%= site.bower %>/bootstrap/less/*'],
-            dest: '<%= site.src %>/less/bootstrap/',
+            cwd: '<%= site.bower %>/bootstrap/less/',
+            src: ['**'],
+            dest: '<%= site.src %>/less/bootstrap',
             filter: 'isFile'
           },
           { // Font-awesome less stylesheets
@@ -152,15 +144,16 @@ module.exports = function(grunt) {
     // Watch Tasks
     watch: {
       less: {
-        files: ['<%= site.src %>/less/**/*.less'],
+        files: ['<%= site.src %>/less/{,*/}*.less'],
         tasks: ['less:development']
       },
       jshint: {
         files: [
-          '<%= site.app %>/assets/js/app/*.js',
-          'server/server.js'
+          'server/server.js',
+          '<%= site.app %>/scripts/app/*.js',
+          '<%= site.app %>/scripts/app/**/*.js'
         ],
-        tasks: ['jshint:express', 'jshint:app']
+        tasks: ['jshint']
       }
     },
 
@@ -206,19 +199,15 @@ module.exports = function(grunt) {
         src: ['Gruntfile.js']
       },
       express: {
-        options: {
-          jshintrc: 'server/.jshintrc'
-        },
-        src: [
-          'server/server.js'
-        ]
+        options: { jshintrc: 'server/.jshintrc' },
+        src: ['server/server.js']
       },
       app: {
-        options: {
-          jshintrc: '<%= site.app %>/core/app/.jshintrc'
+        options: { jshintrc: '.jshintrc'
         },
         src: [
-          '<%= site.app %>/core/app/app.js'
+          '<%= site.app %>/scripts/app/app.js',
+          '<%= site.app %>/modules/**/*.js'
         ]
       }
     },

@@ -9,33 +9,36 @@ var express = require('express')
   , http    = require('http');
 
 
-var App = express();
+var express = require('express')
+  , http    = require('http')
+  , App     = express();
 
-App.configure(function () {
+// Express Server Config
+App.set('port', process.env.PORT || 9001);
 
-  App.set('port', process.env.PORT || 4001);
+// Application directories
+App.use('/assets',  express.static(__dirname + '/../app/assets'));
+App.use('/scripts', express.static(__dirname + '/../app/scripts'));
+App.use('/modules', express.static(__dirname + '/../app/modules'));
 
-	// Application directories
-  App.use('/core', express.static(__dirname + '/../application/core'));
-  App.use('/assets', express.static(__dirname + '/../application/assets'));
-  App.use('/includes', express.static(__dirname + '/../application/includes'));
-
-  // 404 Forbidden
-  // Deny direct access to public directories
-  App.use('/assets', function (req, res) {
-    res.sendfile('application/error.html');
-  });
-
-  App.use('/views', function (req, res) {
-    res.sendfile('application/error.html');
-  });
-
-  App.all('*', function (req, res) {
-    res.sendfile('application/index.html');
-  });
-
+// 404 Forbidden
+// Deny direct access to public directories
+App.use('/scripts', function (req, res) {
+  res.sendfile('app/error.html');
 });
 
+App.use('/modules', function (req, res) {
+  res.sendfile('app/error.html');
+});
+
+App.use('/assets', function (req, res) {
+  res.sendfile('app/error.html');
+});
+
+// Let AngularJS handle all routing
+App.all('*', function (req, res) {
+  res.sendfile('app/index.html');
+});
 
 http.createServer(App).listen(App.get('port'), function () {
   console.log('Express serving from http://localhost:' + App.get('port'));
