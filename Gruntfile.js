@@ -8,7 +8,6 @@ module.exports = function(grunt) {
   // Project Configuration
 
   grunt.initConfig({
-    pkg: grunt.file.readJSON('package.json'),
     site: {
       app:      'app',
       src:      'src',
@@ -203,7 +202,7 @@ module.exports = function(grunt) {
         src: ['server/server.js']
       },
       app: {
-        options: { jshintrc: '.jshintrc'
+        options: { jshintrc: 'server/.jshintrc'
         },
         src: [
           '<%= site.app %>/scripts/app/app.js',
